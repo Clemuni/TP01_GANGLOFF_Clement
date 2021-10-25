@@ -1,5 +1,6 @@
-$('#lastname').on('input', function () {
-    const input = $(this);
+function verifyLastname(event, inputElement = null) {
+    console.log('yes');
+    const input = inputElement || $(this);
     const errorMessage = input.parent().find('.error.required');
     if (input.val()) {
         input.removeClass('invalid');
@@ -8,7 +9,8 @@ $('#lastname').on('input', function () {
         input.addClass('invalid');
         errorMessage.addClass('show');
     }
-});
+}
+$('#lastname').on('input', verifyLastname);
 
 $('#firstname').on('input', function () {
     const input = $(this);
@@ -126,5 +128,13 @@ $('#confirmPassword').on('input', function () {
     } else {
         input.addClass('invalid');
         errorMessage.addClass('show');
+    }
+});
+
+$('#submitBtn').click(function (event) {
+    const form_data = $('#signupForm').serializeArray();
+    let error_free = true;
+    for (let input in form_data) {
+        const element = $('#signupForm #' + form_data[input]['name']);
     }
 });
